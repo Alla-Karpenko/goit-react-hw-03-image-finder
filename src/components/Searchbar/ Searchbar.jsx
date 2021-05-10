@@ -10,9 +10,12 @@ class  Searchbar extends Component{
 
   handelSubmit = e => {
     e.preventDefault();
-
+    if (this.state.searchQuery.trim() === ''){
+      alert('Заполните форму поиска')
+    } else {
     this.props.onSubmit(this.state.searchQuery)
     this.setState({ searchQuery: ''})
+    }
   }
  
    render () {

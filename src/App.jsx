@@ -29,12 +29,22 @@ class App extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
+        
         if(prevState.searchQuery !== this.state.searchQuery) {
             this.fetchHits();
+        }
+        if (prevState.currentPage  !== this.state.currentPage ) {
+            window.scrollTo({
+                top: document.documentElement.scrollHeight,
+                behavior: 'smooth',
+            }); 
         }
     }
  
     onChangeQuery = query => {
+        if ( !query ) {
+            alert('Заполните форму поиска');
+        }
         this.setState({ searchQuery: query, currentPage: 1, hits: [] });
     }
     
@@ -53,11 +63,6 @@ class App extends Component {
         })
         .catch((error) => console.log(error))
         .finally(() => this.setState({ isLoading: false }));
-
-        window.scrollTo({
-            top: document.documentElement.scrollHeight,
-            behavior: 'smooth',
-        });
     };
 
     setLargeImage = imgUrl => {
