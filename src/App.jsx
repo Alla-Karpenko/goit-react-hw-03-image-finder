@@ -33,11 +33,11 @@ class App extends Component {
         if(prevState.searchQuery !== this.state.searchQuery) {
             this.fetchHits();
         }
-        if (prevState.currentPage  !== this.state.currentPage ) {
+        if (this.state.currentPage !== 2 && prevState.currentPage !== this.state.currentPage) {
             window.scrollTo({
-                top: document.documentElement.scrollHeight,
-                behavior: 'smooth',
-            }); 
+              top: document.documentElement.scrollHeight,
+              behavior: 'smooth',
+            });
         }
     }
  
@@ -59,7 +59,7 @@ class App extends Component {
             { this.setState( prevState => ({
             hits: [...prevState.hits, ...hits],
             currentPage: prevState.currentPage + 1,
-        }))
+        })) 
         })
         .catch((error) => console.log(error))
         .finally(() => this.setState({ isLoading: false }));
@@ -93,4 +93,5 @@ class App extends Component {
 }
 
 export default App;
+
 
